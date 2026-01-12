@@ -1,0 +1,22 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force LF line endings for files that should always use Unix-style endings
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.dockerignore text eol=lf
+
+# Force LF for common config files
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+.env* text eol=lf
+
+# Denote binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

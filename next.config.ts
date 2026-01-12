@@ -1,0 +1,38 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  output: process.env.DOCKER_BUILD === "true" ? "standalone" : undefined,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "100MB",
+    },
+  },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cloud.appwrite.io",
+      },
+    ],
+  },
+};
+
+export default nextConfig;
