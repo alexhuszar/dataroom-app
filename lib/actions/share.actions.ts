@@ -28,6 +28,8 @@ export async function shareFile(
   currentUserEmail: string
 ): Promise<ShareFileResult> {
   try {
+    await db.init();
+
     const normalizedEmail = recipientEmail.toLowerCase().trim();
 
     if (!fileId || !recipientEmail || !currentUserId) {
@@ -87,6 +89,8 @@ export async function getSharedWithMe(
   currentUserEmail: string
 ): Promise<SharedFileWithOwner[]> {
   try {
+    await db.init();
+
     const normalizedEmail = currentUserEmail.toLowerCase();
 
     const sharesByEmail = await db.getSharesByEmail(normalizedEmail);
@@ -125,6 +129,8 @@ export async function getFileShares(
   currentUserId: string
 ): Promise<Share[]> {
   try {
+    await db.init();
+
     const file = await db.get<FileDocument>(STORES.FILES, fileId);
     if (!file || file.owner !== currentUserId) {
       return [];
@@ -139,6 +145,8 @@ export async function getFileShares(
 
 export async function getMyShares(currentUserId: string): Promise<Share[]> {
   try {
+    await db.init();
+
     return await db.getSharesByOwnerId(currentUserId);
   } catch (error) {
     console.error("Error getting my shares:", error);
@@ -151,6 +159,8 @@ export async function revokeShare(
   currentUserId: string
 ): Promise<ShareFileResult> {
   try {
+    await db.init();
+
     const share = await db.get<Share>(STORES.SHARES, shareId);
 
     if (!share) {
@@ -176,6 +186,8 @@ export async function canAccessFile(
   userEmail: string
 ): Promise<{ canAccess: boolean; permission?: "view" | "owner" }> {
   try {
+    await db.init();
+
     const file = await db.get<FileDocument>(STORES.FILES, fileId);
 
     if (!file) {
@@ -207,6 +219,8 @@ export async function canAccessFile(
 
 export async function deleteFileShares(fileId: string): Promise<void> {
   try {
+    await db.init();
+
     const shares = await db.getSharesByFileId(fileId);
     await Promise.all(
       shares.map((share) => db.delete(STORES.SHARES, share.id))
