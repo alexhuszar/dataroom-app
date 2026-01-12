@@ -38,7 +38,8 @@ CMD ["node", "server.js"]
 # To build the Docker image, run:
 # docker build -t dataroom-app .
 # To run the Docker container, use:
-# docker run -p 3000:3000 dataroom-app  
+# docker run -p 3000:3000 --env-file .env dataroom-app
+# or
+# docker-compose up
 # Then access the app at http://localhost:3000
-# Make sure to set up environment variables as needed for production use.
 

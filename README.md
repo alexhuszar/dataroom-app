@@ -46,65 +46,9 @@ A Next.js application for secure data room management with file storage, user au
 5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-### Vercel Deployment
 
 This application is optimized for deployment on Vercel.
 
-#### Deploy to Vercel
-
-1. **Push your code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Import your GitHub repository
-   - Vercel will auto-detect Next.js settings
-
-3. **Configure Environment Variables**
-
-   In your Vercel project settings, add:
-
-   ```env
-   DATABASE_URL=your-postgresql-connection-string
-   NEXTAUTH_URL=https://your-app.vercel.app
-   NEXTAUTH_SECRET=your-generated-secret
-   ```
-
-4. **Deploy**
-   - Click "Deploy"
-   - Vercel will build and deploy automatically
-
-#### Database Options for Vercel
-
-Since Vercel doesn't provide PostgreSQL, use one of these services:
-
-- **Vercel Postgres** (Neon-powered, native integration)
-  ```bash
-  vercel postgres create
-  ```
-
-- **Supabase** - PostgreSQL + Auth + Storage
-  - [supabase.com](https://supabase.com)
-  - Free tier available
-
-- **Neon** - Serverless PostgreSQL
-  - [neon.tech](https://neon.tech)
-  - Auto-scaling, free tier
-
-- **Railway** - PostgreSQL hosting
-  - [railway.app](https://railway.app)
-  - Simple deployment
-
-#### Generate NEXTAUTH_SECRET
-
-```bash
-openssl rand -base64 32
-```
 
 ## Project Structure
 
