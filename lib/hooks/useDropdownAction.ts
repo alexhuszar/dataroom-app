@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { useFile } from "@/lib/contexts/FileContext";
 import { useFolder } from "@/lib/contexts/FolderContext";
 import { useToast } from "@/lib/hooks/useToast";
-import { getFiles } from "../actions/file.actions";
 
 export type ActionValue =
   | "rename"
@@ -59,7 +58,7 @@ export const useDropdownAction = ({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const { deleteFile, renameFile } = useFile();
+  const { deleteFile, renameFile, getFiles } = useFile();
   const { deleteFolder, renameFolder, getFolders } = useFolder();
 
   const itemId = item.id || item.$id || "";

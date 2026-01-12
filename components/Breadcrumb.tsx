@@ -23,7 +23,7 @@ const Breadcrumb = () => {
               href={crumb.url}
               className="flex items-center gap-1 transition-colors hover:text-brand"
             >
-              {crumb.id === null && <><Home size={14} /> Board</>}
+              {crumb.id === null ? <><Home size={14} /> Board</> : crumb.name}
             </Link>
           )}
         </React.Fragment>
