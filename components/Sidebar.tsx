@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { cn } from "@/lib/utils/tailwind";
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 
 const Sidebar = ({ fullName, email }: Props) => {
   const pathname = usePathname();
+  const params = useParams();
 
   return (
     <aside className="sidebar">
@@ -28,19 +29,25 @@ const Sidebar = ({ fullName, email }: Props) => {
 
       <nav className="sidebar-nav">
         <ul className="flex flex-1 flex-col gap-2">
-          {navItems.map(({ url, name, icon }) => (
-            <Link key={name} href={url} className="lg:w-full">
-              <li
-                className={cn(
-                  "sidebar-nav-item",
-                  pathname === url && "shad-active"
-                )}
-              >
-                {icon}
-                <span className="hidden lg:block">{name}</span>
-              </li>
-            </Link>
-          ))}
+          {navItems.map(({ url, name, icon }) => {
+            const isActive = url === "/"
+              ? pathname === "/" || params?.id
+              : pathname === url || pathname.startsWith(`${url}/`);
+
+            return (
+              <Link key={name} href={url} className="lg:w-full">
+                <li
+                  className={cn(
+                    "sidebar-nav-item",
+                    isActive && "shad-active"
+                  )}
+                >
+                  {icon}
+                  <span className="hidden lg:block">{name}</span>
+                </li>
+              </Link>
+            );
+          })}
         </ul>
       </nav>
 

@@ -106,7 +106,7 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
             <label className="mb-2 block text-sm text-light-200">
               Share with:
             </label>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               <div className="relative flex-1">
                 <Mail
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-light-100"

@@ -318,44 +318,44 @@ export const deleteFolder = async ({ folderId, path }: DeleteFolderProps) => {
   }
 };
 
-export const getBreadcrumbs = async ({
-  folderId,
-  ownerId,
-}: {
-  folderId: string | null;
-  ownerId: string;
-}) => {
-  try {
-    if (folderId === null) {
-      return [{ id: null, name: "Root", url: "/" }];
-    }
+// export const getBreadcrumbs = async ({
+//   folderId,
+//   ownerId,
+// }: {
+//   folderId: string | null;
+//   ownerId: string;
+// }) => {
+//   try {
+//     if (folderId === null) {
+//       return [{ id: null, name: "Root", url: "/" }];
+//     }
 
-    await db.init();
-    const userFolders = await db.getAllFoldersByUser(ownerId);
+//     await db.init();
+//     const userFolders = await db.getAllFoldersByUser(ownerId);
 
-    const breadcrumbs: BreadcrumbItem[] = [];
-    let currentId: string | null = folderId;
+//     const breadcrumbs: BreadcrumbItem[] = [];
+//     let currentId: string | null = folderId;
 
-    while (currentId !== null) {
-      const folder = userFolders.find((f) => f.id === currentId);
-      if (!folder) break;
+//     while (currentId !== null) {
+//       const folder = userFolders.find((f) => f.id === currentId);
+//       if (!folder) break;
 
-      breadcrumbs.unshift({
-        id: folder.id,
-        name: folder.name,
-        url: `/?folder=${folder.id}`,
-      });
+//       breadcrumbs.unshift({
+//         id: folder.id,
+//         name: folder.name,
+//         url: `/?folder=${folder.id}`,
+//       });
 
-      currentId = folder.parentId;
-    }
+//       currentId = folder.parentId;
+//     }
 
-    breadcrumbs.unshift({ id: null, name: "Root", url: "/" });
+//     breadcrumbs.unshift({ id: null, name: "Root", url: "/" });
 
-    return parseStringify(breadcrumbs);
-  } catch (error) {
-    handleError(error, "Failed to get breadcrumbs");
-  }
-};
+//     return parseStringify(breadcrumbs);
+//   } catch (error) {
+//     handleError(error, "Failed to get breadcrumbs");
+//   }
+// };
 
 export const getFolderStats = async ({
   folderId,

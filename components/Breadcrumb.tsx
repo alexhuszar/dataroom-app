@@ -15,14 +15,15 @@ const Breadcrumb = () => {
           {index > 0 && <ChevronRight size={16} className="text-light-100" />}
 
           {index === breadcrumbs.length - 1 ? (
-            <span className="font-semibold text-light-100">{crumb.name}</span>
+            <span className="flex items-center gap-1 font-semibold text-light-100">
+              {crumb.id === null ?  <><Home size={14} /> Board</>: crumb.name}
+            </span>
           ) : (
             <Link
               href={crumb.url}
-              className=" flex items-center gap-1 transition-colors hover:text-brand"
+              className="flex items-center gap-1 transition-colors hover:text-brand"
             >
-              {crumb.id === null && <Home size={14} />}
-              {crumb.name}
+              {crumb.id === null && <><Home size={14} /> Board</>}
             </Link>
           )}
         </React.Fragment>

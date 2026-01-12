@@ -76,21 +76,27 @@ const MobileNavigation = ({
 
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">
-              {navItems.map(({ url, name, icon }) => (
-                <li key={name}>
-                  <Link
-                    href={url}
-                    onClick={closeSheet}
-                    className={cn(
-                      "mobile-nav-item",
-                      pathname === url && "shad-active"
-                    )}
-                  >
-                    {icon}
-                    <span>{name}</span>
-                  </Link>
-                </li>
-              ))}
+              {navItems.map(({ url, name, icon }) => {
+                const isActive = url === "/"
+                  ? pathname === "/" || params?.id
+                  : pathname === url || pathname.startsWith(`${url}/`);
+
+                return (
+                  <li key={name}>
+                    <Link
+                      href={url}
+                      onClick={closeSheet}
+                      className={cn(
+                        "mobile-nav-item",
+                        isActive && "shad-active"
+                      )}
+                    >
+                      {icon}
+                      <span>{name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 

@@ -6,7 +6,7 @@ import Search from "@/components/Search";
 import { useSearchParams } from "next/navigation";
 import Loading from "./Loading";
 
-const Dashboard = ({ mode, title }: { mode?: FetchMode, title?: string }) => {
+const Dashboard = ({ mode }: { mode?: FetchMode }) => {
   const { files, folders, isLoading } = useDashboardData({ mode });
 
   const searchParams = useSearchParams();
@@ -15,7 +15,6 @@ const Dashboard = ({ mode, title }: { mode?: FetchMode, title?: string }) => {
 
   return (
     <section className="dashboard-recent-files relative">
-      <h1 className="mb-4 text-2xl font-bold text-light-100">{title}</h1>
 
       <div className="mt-9 flex justify-center">
         <Search />
@@ -23,7 +22,7 @@ const Dashboard = ({ mode, title }: { mode?: FetchMode, title?: string }) => {
 
       {isLoading && <Loading />}
 
-      <DataTable folders={folders} files={files} currentSort={sort} />
+      {!isLoading && <DataTable folders={folders} files={files} currentSort={sort} />}
     </section>
   );
 };

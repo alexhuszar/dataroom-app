@@ -24,18 +24,17 @@ const FolderCard = ({ folder }: Props) => {
     >
       <div className="flex justify-between">
         <div className="flex items-center gap-3">
-          <div className=" rounded-lg bg-brand/10 p-3">
+          <div className="rounded-lg bg-brand/10 p-3">
             <Folder size={24} className="text-brand" />
           </div>
           <div>
-            <p className="subtitle-2 line-clamp-1">{folder.name}</p>
+            <p className="subtitle-2 line-clamp-1 truncate">{folder.name}</p>
             <FormattedDateTime
               date={folder.createdAt || "-"}
               className="body-2 text-light-100"
             />
           </div>
         </div>
-
         <div className="flex flex-col items-end justify-between">
           <ActionDropdown item={folder} type="folder" />
         </div>

@@ -11,9 +11,15 @@ import {
 } from "lucide-react";
 import type { ActionItem } from "@/lib/hooks/useDropdownAction";
 
-export const navItems = [
+export interface NavItem {
+  name: string;
+  url: string;
+  icon: React.ReactNode;
+}
+
+export const navItems: NavItem[] = [
   {
-    name: "Home",
+    name: "Board",
     icon: <Home />,
     url: "/",
   },

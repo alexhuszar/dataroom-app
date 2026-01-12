@@ -82,7 +82,7 @@ const MoveFolderDialog = ({ folder, onClose }: Props) => {
         </DialogTitle>
 
         <div className="max-h-[400px] space-y-2 overflow-y-auto ">
-          {/* Root option */}
+
           <button
             onClick={() => setSelectedFolderId(null)}
             className={`flex w-full gap-3 p-3 transition-colors   ${
@@ -95,7 +95,6 @@ const MoveFolderDialog = ({ folder, onClose }: Props) => {
             <span>Root (Top Level)</span>
           </button>
 
-          {/* Other folders */}
           {allFolders.map((f) => (
             <button
               key={f.id}

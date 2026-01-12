@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import AddButton from "@/components/AddButton";
 import { useAuth } from "@/lib/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Breadcrumb from "./Breadcrumb";
+import { navItems } from "@/constants";
 
 const Header = ({
   userId,
@@ -15,6 +16,10 @@ const Header = ({
   userId: string;
   accountId: string;
 }) => {
+  const pathname = usePathname();
+
+  const activeItem = navItems.find(item => item.url === pathname && pathname !== '/');
+
   const { signOut } = useAuth();
   const router = useRouter();
 
@@ -25,7 +30,7 @@ const Header = ({
 
   return (
     <header className="header">
-      <Breadcrumb />
+      {activeItem ? <span className="text-light-100">{activeItem.name}</span> : <Breadcrumb />}
       <div className="header-wrapper">
         <AddButton ownerId={userId} accountId={accountId} />
         <Button onClick={handleSignOut} className="sign-out-button">
