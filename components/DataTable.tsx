@@ -30,7 +30,7 @@ interface DataTableProps {
   folders: FolderDocumentType[];
   files: FileDocumentType[];
   currentSort?: string;
-  emptyMessage: string;
+  emptyMessage?: string;
 }
 
 type TableRowData =

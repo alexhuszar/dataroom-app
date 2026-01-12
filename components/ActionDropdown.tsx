@@ -118,7 +118,7 @@ const ActionDropdown = ({
                 <span className="delete-file-name">{item.name}</span>?
               </p>
               {type === "folder" && (
-                <p className="text-red-300 text-sm mt-2">
+                <p className="mt-2 text-sm text-error">
                   This deletes all sub-contents.
                 </p>
               )}

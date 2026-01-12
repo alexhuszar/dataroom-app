@@ -7,7 +7,7 @@ const DashboardPage = async ({
 }>) => {
   const { id } = await params;
 
-  return <Dashboard key={`folder-${id}`} />;
+  return <Dashboard key={`folder-${id}`} title="Home" />;
 };
 
 export default DashboardPage;

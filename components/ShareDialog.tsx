@@ -97,20 +97,19 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
       >
         <DialogHeader>
           <DialogTitle className="text-center text-light-100">
-            Share "{fileName}"
+            Share &quot;{fileName}&ldquo;
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4 mt-4">
-          {/* Share Input Section */}
+        <div className="mt-4 space-y-4">
           <div>
-            <label className="text-sm text-light-200 mb-2 block">
+            <label className="mb-2 block text-sm text-light-200">
               Share with:
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <Mail
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-light-100"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-light-100"
                   size={16}
                 />
                 <Input
@@ -137,9 +136,8 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
             </div>
           </div>
 
-          {/* Shared With Section */}
           <div>
-            <label className="text-sm text-light-200 mb-2 block">
+            <label className="mb-2 block text-sm text-light-200">
               Shared with:
             </label>
             {isLoadingShares ? (
@@ -147,19 +145,19 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
                 <LoaderCircle className="animate-spin text-brand" size={20} />
               </div>
             ) : shares.length > 0 ? (
-              <div className="space-y-2 max-h-[200px] overflow-y-auto">
+              <div className="max-h-[200px] space-y-2 overflow-y-auto">
                 {shares.map((share) => (
                   <div
                     key={share.id}
-                    className="flex items-center justify-between bg-light-400 p-3 rounded-lg"
+                    className="flex items-center justify-between rounded-lg bg-light-400 p-3"
                   >
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <Mail className="text-brand flex-shrink-0" size={16} />
-                      <span className="text-sm text-light-100 truncate">
+                    <div className="flex min-w-0 flex-1 items-center gap-2">
+                      <Mail className="shrink-0 text-brand" size={16} />
+                      <span className="truncate text-sm text-light-100">
                         {share.sharedWithEmail}
                       </span>
                       {!share.sharedWithUserId && (
-                        <span className="text-xs text-light-200 bg-light-300 px-2 py-0.5 rounded flex-shrink-0">
+                        <span className="shrink-0 rounded bg-light-300 px-2 py-0.5 text-xs text-light-200">
                           Pending
                         </span>
                       )}
@@ -168,7 +166,7 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
                       onClick={() => handleRevoke(share.id)}
                       variant="ghost"
                       size="sm"
-                      className="text-error hover:text-error hover:bg-error/10 ml-2 flex-shrink-0"
+                      className="ml-2 shrink-0 text-error hover:bg-error/10 hover:text-error"
                       disabled={isLoading}
                     >
                       <X size={16} />
@@ -177,7 +175,7 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-light-200 text-center py-4">
+              <p className="py-4 text-center text-sm text-light-200">
                 No one has access to this file yet
               </p>
             )}

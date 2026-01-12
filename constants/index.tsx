@@ -23,7 +23,7 @@ export const navItems = [
     url: "/documents",
   },
   {
-    name: "Shared with me",
+    name: "Shared documents",
     icon: <Users />,
     url: "/shared",
   },
