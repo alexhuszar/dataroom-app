@@ -9,7 +9,8 @@ export type ActionValue =
   | "delete"
   | "details"
   | "move"
-  | "download";
+  | "download"
+  | "share";
 
 export interface ActionItem {
   label: string;

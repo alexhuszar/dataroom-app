@@ -16,7 +16,7 @@ const Sidebar = ({ fullName, email }: Props) => {
 
   return (
     <aside className="sidebar">
-      <Link href="/" className="flex items-center gap-2">
+      <Link href="/dashboard" className="flex items-center gap-2">
         <Image
           src="/assets/images/logo.png"
           alt="logo"

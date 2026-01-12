@@ -13,10 +13,6 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "100MB",
     },
   },
-  webpack: (config) => {
-    config.resolve.alias.canvas = false;
-    return config;
-  },
   images: {
     remotePatterns: [
       {

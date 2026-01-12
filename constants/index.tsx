@@ -6,6 +6,8 @@ import {
   Info,
   Trash,
   Home,
+  Share2,
+  Users,
 } from "lucide-react";
 import type { ActionItem } from "@/lib/hooks/useDropdownAction";
 
@@ -20,6 +22,11 @@ export const navItems = [
     icon: <FileText />,
     url: "/documents",
   },
+  {
+    name: "Shared with me",
+    icon: <Users />,
+    url: "/shared",
+  },
 ];
 
 export const actionsDropdownItems: ActionItem[] = [
@@ -27,6 +34,11 @@ export const actionsDropdownItems: ActionItem[] = [
     label: "Rename",
     icon: <Pen size={12} />,
     value: "rename",
+  },
+  {
+    label: "Share",
+    icon: <Share2 size={12} />,
+    value: "share",
   },
   {
     label: "Download",

@@ -194,7 +194,7 @@
     @apply mx-auto h-full !important;
   }
   .dashboard-recent-files {
-    @apply h-full rounded-[10px] bg-white p-2 xl:p-8 !important;
+    @apply h-full rounded-[10px] bg-white p-4 xl:p-8 !important;
   }
   .recent-file-name {
     @apply subtitle-2 line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
@@ -382,10 +382,10 @@
 
   /* Sidebar */
   .sidebar {
-    @apply remove-scrollbar hidden h-screen w-[90px] flex-col overflow-auto px-5 py-7 sm:flex lg:w-[280px] xl:w-[325px] bg-brand/5 !important;
+    @apply remove-scrollbar h-screen w-[90px] flex-col overflow-auto px-5 py-7 hidden sm:flex lg:w-[280px] xl:w-[325px] bg-brand/5 !important;
   }
   .sidebar-nav {
-    @apply h5 flex-1 gap-1 text-brand !important;
+    @apply h5 flex-1 gap-1 mt-10 text-brand !important;
   }
   .sidebar-nav-item {
     @apply flex text-light-100 gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center h5 lg:px-[30px] h-[52px] !important;

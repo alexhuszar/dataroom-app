@@ -29,6 +29,8 @@ import {
   FolderDocumentType,
 } from "@/lib/hooks/useDropdownAction";
 import MoveFolderDialog from "./MoveFolderDialog";
+import ShareDialog from "./ShareDialog";
+import { useAuth } from "@/lib/contexts/AuthContext";
 
 const ActionDropdown = ({
   item,
@@ -38,8 +40,10 @@ const ActionDropdown = ({
   type: "file" | "folder";
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const [action, setAction] = useState<ActionItem | null>(null);
   const [name, setName] = useState(item.name);
+  const { user } = useAuth();
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
@@ -152,22 +156,38 @@ const ActionDropdown = ({
     executeAction,
   ]);
 
-  const menuItems: ActionItem[] =
-    type === "file"
-      ? actionsDropdownItems
-      : [
-          {
-            label: "Rename",
-            value: "rename" as const,
-            icon: <Pen size={12} />,
-          },
-          { label: "Move", value: "move" as const, icon: <Move size={12} /> },
-          {
-            label: "Delete",
-            value: "delete" as const,
-            icon: <Trash size={12} />,
-          },
-        ];
+  // Check if current user is the owner
+  const isOwner = user && item.owner === user.id;
+
+  // Filter menu items based on ownership
+  const menuItems: ActionItem[] = useMemo(() => {
+    if (type === "folder") {
+      return [
+        {
+          label: "Rename",
+          value: "rename" as const,
+          icon: <Pen size={12} />,
+        },
+        { label: "Move", value: "move" as const, icon: <Move size={12} /> },
+        {
+          label: "Delete",
+          value: "delete" as const,
+          icon: <Trash size={12} />,
+        },
+      ];
+    }
+
+    // For files, filter based on ownership
+    if (isOwner) {
+      // Owner can do everything
+      return actionsDropdownItems;
+    } else {
+      // Non-owner (shared file recipient) can only view and download
+      return actionsDropdownItems.filter(
+        (item) => item.value === "download" || item.value === "details"
+      );
+    }
+  }, [type, isOwner]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -191,6 +211,8 @@ const ActionDropdown = ({
                 e.stopPropagation();
                 if (m.value === "download") {
                   handleDownload();
+                } else if (m.value === "share") {
+                  setIsShareDialogOpen(true);
                 } else {
                   setAction(m);
                   setIsModalOpen(true);
@@ -205,6 +227,14 @@ const ActionDropdown = ({
         </DropdownMenuContent>
       </DropdownMenu>
       {dialogContent}
+      {type === "file" && (
+        <ShareDialog
+          fileId={item.id}
+          fileName={item.name}
+          isOpen={isShareDialogOpen}
+          onClose={() => setIsShareDialogOpen(false)}
+        />
+      )}
     </Dialog>
   );
 };

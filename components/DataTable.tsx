@@ -30,6 +30,7 @@ interface DataTableProps {
   folders: FolderDocumentType[];
   files: FileDocumentType[];
   currentSort?: string;
+  emptyMessage: string;
 }
 
 type TableRowData =
@@ -44,7 +45,7 @@ const getFileTypeName = (fileType: string): string => {
   return typeMap[fileType] || "File";
 };
 
-const DataTable = ({ folders, files, currentSort }: DataTableProps) => {
+const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or folders found!' }: DataTableProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -262,7 +263,7 @@ const DataTable = ({ folders, files, currentSort }: DataTableProps) => {
 
   if(tableData.length === 0) { 
     return (
-      <p className="h3 empty-list mt-5">No files or folders found!</p>
+      <p className="h3 empty-list mt-5">{emptyMessage}</p>
     );
   }
 

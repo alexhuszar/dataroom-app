@@ -13,8 +13,6 @@ import Thumbnail from "@/components/Thumbnail";
 import { useToast } from "@/lib/hooks/useToast";
 import { useFile } from "@/lib/contexts/FileContext";
 import { getFileType } from "@/lib/utils/file";
-import { X } from "lucide-react";
-import { Button } from "./ui/button";
 
 export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
@@ -77,16 +75,6 @@ const FileUploader = forwardRef<FileUploaderHandle, Props>(
     );
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
-
-    const handleRemoveFile = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      fileName: string
-    ) => {
-      e.stopPropagation();
-      setFiles((prevFiles) =>
-        prevFiles.filter((file) => file.name !== fileName)
-      );
-    };
 
     return (
       <>

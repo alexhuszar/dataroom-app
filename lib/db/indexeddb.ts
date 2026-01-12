@@ -2,7 +2,7 @@ import { updateTimestamp, withTimestamps } from "../utils/date"
 import { generateId } from "../utils/general"
 
 const DB_NAME = "StorageManagementDB"
-const DB_VERSION = 4
+const DB_VERSION = 5
 
 export const STORES = {
   USERS: "users",
@@ -10,6 +10,7 @@ export const STORES = {
   FOLDERS: "folders",
   SESSIONS: "sessions",
   ACCOUNTS: "accounts",
+  SHARES: "shares",
 } as const
 
 type StoreName = typeof STORES[keyof typeof STORES]
@@ -74,6 +75,17 @@ export interface Account {
   scope?: string
   id_token?: string
   createdAt?: string
+}
+
+export interface Share {
+  id: string
+  fileId: string
+  ownerId: string
+  sharedWithEmail: string
+  sharedWithUserId?: string
+  permission: 'view'
+  createdAt?: string
+  updatedAt?: string
 }
 
 
@@ -141,6 +153,13 @@ class IndexedDBService {
           ["userId", "userId"],
           ["provider", "provider"],
           ["providerAccountId", "providerAccountId"],
+        ])
+
+        createStore(STORES.SHARES, "id", [
+          ["fileId", "fileId"],
+          ["ownerId", "ownerId"],
+          ["sharedWithEmail", "sharedWithEmail"],
+          ["sharedWithUserId", "sharedWithUserId"],
         ])
       }
     })
@@ -260,6 +279,22 @@ class IndexedDBService {
         .filter(s => s.expires < now)
         .map(s => this.delete(STORES.SESSIONS, s.id))
     )
+  }
+
+  async getSharesByFileId(fileId: string): Promise<Share[]> {
+    return this.getByIndex<Share>(STORES.SHARES, "fileId", fileId)
+  }
+
+  async getSharesByOwnerId(ownerId: string): Promise<Share[]> {
+    return this.getByIndex<Share>(STORES.SHARES, "ownerId", ownerId)
+  }
+
+  async getSharesByEmail(email: string): Promise<Share[]> {
+    return this.getByIndex<Share>(STORES.SHARES, "sharedWithEmail", email)
+  }
+
+  async getSharesByUserId(userId: string): Promise<Share[]> {
+    return this.getByIndex<Share>(STORES.SHARES, "sharedWithUserId", userId)
   }
 }
 
