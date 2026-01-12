@@ -31,7 +31,7 @@ const Sidebar = ({ fullName, email }: Props) => {
         <ul className="flex flex-1 flex-col gap-2">
           {navItems.map(({ url, name, icon }) => {
             const isActive = url === "/"
-              ? pathname === "/" || params?.id
+              ? pathname === "/" || (params?.id && !pathname.startsWith("/documents") && !pathname.startsWith("/shared"))
               : pathname === url || pathname.startsWith(`${url}/`);
 
             return (
