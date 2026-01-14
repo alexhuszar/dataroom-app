@@ -186,25 +186,17 @@
     @apply cursor-pointer !important;
   }
 
-  .main-content {
-    @apply remove-scrollbar h-full flex-1 overflow-auto !important;
-  }
-
   .dashboard-container {
-    @apply mx-auto h-full !important;
+    @apply mx-auto h-full overflow-auto;
   }
-  .dashboard-recent-files {
-    @apply h-full rounded-[10px] bg-white p-4 xl:p-8 !important;
+  .dashboard-colum-wrap {
+    @apply flex flex-col overflow-auto gap-4 h-full p-4 xl:p-8;
   }
   .recent-file-name {
     @apply subtitle-2 line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
   }
   .empty-list {
-    @apply body-1 mt-10 text-center text-light-200 !important;
-  }
-
-  .data-table-container {
-    @apply rounded-[10px] bg-white overflow-hidden !important;
+    @apply body-1 mt-10 text-center text-light-200;
   }
 
   .data-table {
@@ -220,7 +212,7 @@
   }
 
   .data-table td {
-    @apply py-4 border-b border-light-400/10 !important;
+    @apply sm:p-2 sm:border-b border-light-400;
   }
 
   .data-table tr:last-child td {
@@ -231,27 +223,8 @@
     @apply bg-light-400/5 !important;
   }
 
-  .type-badge {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium !important;
-  }
-
-  .type-badge-folder {
-    @apply text-dark-200 !important;
-  }
-
-  .type-badge-file {
-    @apply bg-light-400/10 text-light-100 !important;
-  }
-
   .sort-indicator {
     @apply inline-block ml-2 text-brand !important;
-  }
-
-  @media (max-width: 768px) {
-    .data-table th.hidden-mobile,
-    .data-table td.hidden-mobile {
-      @apply hidden !important;
-    }
   }
 
   .delete-confirmation {
@@ -296,15 +269,6 @@
     @apply caption mx-auto w-fit rounded-xl bg-error/5 px-4 py-2 text-center text-error !important;
   }
 
-  /* Card */
-  .file-card {
-    @apply flex flex-col gap-3 rounded-[18px] bg-white p-4 border-2 border-light-300  shadow-sm transition-all hover:shadow-drop-3 !important;
-  }
-
-  /* Mobile data cards */
-  .mobile-card-content {
-    @apply flex items-center justify-between gap-3 !important;
-  }
 
   .mobile-card-info {
     @apply flex items-center gap-3 flex-1 min-w-0 !important;
@@ -315,7 +279,7 @@
   }
 
   .uploader-preview-list {
-    @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-drop-3 !important;
+    @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[8px] bg-white p-7 shadow-drop-3 !important;
   }
   .uploader-preview-item {
     @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
@@ -368,13 +332,13 @@
     @apply relative w-full md:max-w-[480px] !important;
   }
   .search-input-wrapper {
-    @apply flex h-[52px] flex-1 items-center gap-3 px-4 shadow-drop-3 rounded-[20px] border-2 border-light-300 !important;
+    @apply flex h-[52px] flex-1 items-center gap-3 px-4 shadow-drop-3 rounded-[8px] border-2 border-light-300 !important;
   }
   .search-input {
     @apply body-2 shad-no-focus  placeholder:body-1 w-full  border-none p-0 shadow-none placeholder:text-light-200 !important;
   }
   .search-result {
-    @apply absolute left-0 top-16 z-50 flex w-full flex-col gap-3 rounded-[20px] bg-white p-4 !important;
+    @apply absolute left-0 top-16 z-50 flex w-full flex-col gap-3 rounded-[8px] bg-white p-4 !important;
   }
   .empty-result {
     @apply body-2 text-center text-light-100 !important;

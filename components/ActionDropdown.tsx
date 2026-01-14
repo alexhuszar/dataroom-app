@@ -146,15 +146,7 @@ const ActionDropdown = ({
         )}
       </DialogContent>
     );
-  }, [
-    action,
-    item,
-    type,
-    name,
-    isLoading,
-    closeModal,
-    executeAction,
-  ]);
+  }, [action, item, type, name, isLoading, closeModal, executeAction]);
 
   // Check if current user is the owner
   const isOwner = user && item.owner === user.id;
@@ -198,7 +190,7 @@ const ActionDropdown = ({
         >
           <EllipsisVertical />
         </DropdownMenuTrigger>
-        <DropdownMenuContent onClick={(e) => e.stopPropagation()}>
+        <DropdownMenuContent onClick={(e) => e.stopPropagation()} align="end">
           <DropdownMenuLabel className="max-w-[200px] truncate">
             {item.name}
           </DropdownMenuLabel>

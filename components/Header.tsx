@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
-import AddButton from "@/components/AddButton";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/contexts/AuthContext";
 import { usePathname, useRouter } from "next/navigation";
 import Breadcrumb from "./Breadcrumb";
 import { navItems } from "@/constants";
+import ActionButtons from "./ActionButtons";
 
 const Header = ({
   userId,
@@ -18,7 +18,9 @@ const Header = ({
 }) => {
   const pathname = usePathname();
 
-  const activeItem = navItems.find(item => item.url === pathname && pathname !== '/');
+  const activeItem = navItems.find(
+    (item) => item.url === pathname && pathname !== "/"
+  );
 
   const { signOut } = useAuth();
   const router = useRouter();
@@ -30,14 +32,17 @@ const Header = ({
 
   return (
     <header className="header">
-      {activeItem ? <span className="text-light-100">{activeItem.name}</span> : <Breadcrumb />}
+      {activeItem ? (
+        <span className="text-light-100">{activeItem.name}</span>
+      ) : (
+        <Breadcrumb />
+      )}
       <div className="header-wrapper">
-        <AddButton ownerId={userId} accountId={accountId} />
+        <ActionButtons ownerId={userId} accountId={accountId} />
         <Button onClick={handleSignOut} className="sign-out-button">
           <LogOut />
         </Button>
       </div>
-
     </header>
   );
 };

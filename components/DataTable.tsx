@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import DataTableMobileView from "@/components/DataTableMobileView";
 import {
   useReactTable,
   getCoreRowModel,
@@ -12,7 +11,15 @@ import {
   flexRender,
   SortingState,
 } from "@tanstack/react-table";
-import { ArrowDownAZ, ArrowUpZA, Folder } from "lucide-react";
+import {
+  ArrowDown10,
+  ArrowDownAZ,
+  ArrowUp10,
+  ArrowUpZA,
+  Folder,
+  MoveDown,
+  MoveUp,
+} from "lucide-react";
 import {
   Table,
   TableBody,
@@ -45,7 +52,12 @@ const getFileTypeName = (fileType: string): string => {
   return typeMap[fileType] || "File";
 };
 
-const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or folders found!' }: DataTableProps) => {
+const DataTable = ({
+  folders,
+  files,
+  currentSort,
+  emptyMessage = "No files or folders found!",
+}: DataTableProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -119,9 +131,9 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
             {sorting[0]?.id === "name" && (
               <span className="sort-indicator">
                 {sorting[0].desc ? (
-                  <ArrowDownAZ size={12} />
+                  <ArrowDownAZ size={14} />
                 ) : (
-                  <ArrowUpZA size={12} />
+                  <ArrowUpZA size={14} />
                 )}
               </span>
             )}
@@ -149,9 +161,9 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
             <Link
               href={`documents/${row.original.data.id}?title=${row.original.data.name}`}
               target="_blank"
-              className="block w-full text-left"
+              className="block w-full min-w-0 text-left"
             >
-              <p className="subtitle-2 text-light-100 transition-colors hover:text-brand">
+              <p className="subtitle-2 truncate text-light-100 transition-colors hover:text-brand">
                 {row.original.data.name}
               </p>
             </Link>
@@ -164,13 +176,9 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
         header: "Type",
         cell: ({ row }) => {
           if (row.original.type === "folder") {
-            return <span className="hidden-mobile caption text-light-200">Folder</span>;
+            return <span className="caption">Folder</span>;
           }
-          return (
-            <span className="type-badge type-badge-file">
-              {getFileTypeName(row.original.data.type)}
-            </span>
-          );
+          return <span>{getFileTypeName(row.original.data.type)}</span>;
         },
         enableSorting: false,
       },
@@ -181,15 +189,15 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
           <button
             type="button"
             onClick={(e) => handleSortChange(e, "size")}
-            className="hidden-mobile flex items-center gap-2  hover:text-light-100 "
+            className="hidden items-center gap-2 hover:text-light-100  sm:flex "
           >
             Size
             {sorting[0]?.id === "size" && (
               <span className="sort-indicator">
                 {sorting[0].desc ? (
-                  <ArrowDownAZ size={12} />
+                  <ArrowDown10 size={14} />
                 ) : (
-                  <ArrowUpZA size={12} />
+                  <ArrowUp10 size={14} />
                 )}
               </span>
             )}
@@ -197,10 +205,10 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
         ),
         cell: ({ row }) => {
           if (row.original.type === "folder")
-            return <span className="hidden-mobile text-light-200 ">-</span>;
+            return <span className="text-light-200">-</span>;
           return (
-            <span className="hidden-mobile text-light-200">
-              {convertFileSize(row.original.data.size)}
+            <span className="text-light-200">
+              {row.original.data.size ? convertFileSize(row.original.data.size) : '-'}
             </span>
           );
         },
@@ -212,15 +220,15 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
           <button
             type="button"
             onClick={(e) => handleSortChange(e, "createdAt")}
-            className="hidden-mobile flex items-center gap-2 hover:text-light-100"
+            className="hidden items-center gap-2 hover:text-light-100 sm:flex "
           >
             Modified
             {sorting[0]?.id === "createdAt" && (
               <span className="sort-indicator">
                 {sorting[0].desc ? (
-                  <ArrowDownAZ size={12} />
+                  <MoveDown size={14} />
                 ) : (
-                  <ArrowUpZA size={12} />
+                  <MoveUp size={14} />
                 )}
               </span>
             )}
@@ -229,7 +237,7 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
         cell: ({ row }) => (
           <FormattedDateTime
             date={row.original.data.createdAt || ""}
-            className="hidden-mobile caption text-light-200"
+            className="text-light-200"
           />
         ),
       },
@@ -237,10 +245,12 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
         id: "actions",
         header: "",
         cell: ({ row }) => (
-          <ActionDropdown
-            item={row.original.data}
-            type={row.original.type === "folder" ? "folder" : "file"}
-          />
+          <div className="justify-end">
+            <ActionDropdown
+              item={row.original.data}
+              type={row.original.type === "folder" ? "folder" : "file"}
+            />
+          </div>
         ),
         enableSorting: false,
         size: 60,
@@ -261,59 +271,108 @@ const DataTable = ({ folders, files, currentSort, emptyMessage = 'No files or fo
     manualSorting: true,
   });
 
-  if(tableData.length === 0) { 
-    return (
-      <p className="h3 empty-list mt-5">{emptyMessage}</p>
-    );
+  if (tableData.length === 0) {
+    return <p className="h3 empty-list mt-5">{emptyMessage}</p>;
   }
 
   return (
-    <>
-      <div className="block md:hidden">
-        <DataTableMobileView folders={folders} files={files} />
-      </div>
-
-
-      <div className="hidden md:block">
-        <div className="data-table-container mt-5">
-          <Table className="data-table">
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead
-                      key={header.id}
-                      style={{ width: header.column.getSize() }}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
+    <div className="mt-5 sm:overflow-hidden">
+      <Table className="data-table">
+        <TableHeader className="hidden sm:table-header-group">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={header.id}
+                  style={{ width: header.column.getSize() }}
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </TableHead>
               ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <TableRow
+              key={row.id}
+              className="
+        mt-4 block rounded-[8px] border-2 border-light-300 bg-white p-4
+        sm:table-row sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none
+      "
+            >
+              <td className="sm:hidden grid grid-cols-[40px_1fr_20px] gap-x-4 gap-y-1">
+     
+                  <div className="row-span-full shrink-0">
+                    {flexRender(
+                      row.getVisibleCells()[0].column.columnDef.cell,
+                      row.getVisibleCells()[0].getContext()
+                    )}
+                  </div>
+
+                  <div className="flex min-w-0 flex-col gap-2">
+                    {row
+                      .getVisibleCells()
+                      .slice(1)
+                      .map((cell) => {
+                        if (cell.column.id === "actions") return null;
+
+                        const isType = cell.column.id === "type";
+                        const isFolder = cell.getValue() === "file";
+
+                        console.log(cell.getValue())
+
+                        return (
+                          <div
+                            key={cell.id}
+                            className={
+                              isType
+                                ? `inline-flex w-fit items-center rounded-[8px] ${isFolder ? "bg-orange" : "bg-green"} px-2 py-1 text-white`
+                                : "truncate text-sm text-light-100"
+                            }
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+
+                  <div className="shrink-0">
+                    {flexRender(
+                      row.getVisibleCells()[5].column.columnDef.cell,
+                      row.getVisibleCells()[5].getContext()
+                    )}
+                  </div>
+           
+              </td>
+
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id} className="hidden sm:table-cell">
+                  {cell.column.id === "type" ? (
+                    <span className={`w-fit items-center rounded-[8px] ${ cell.getValue() === "folder" ? "bg-orange" : "bg-green"} px-2 py-1 text-xs font-medium text-white sm:inline-flex`}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                    </span>
+                  ) : (
+                    flexRender(cell.column.columnDef.cell, cell.getContext())
+                  )}
+                </TableCell>
               ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-    </>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

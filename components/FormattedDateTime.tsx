@@ -1,5 +1,4 @@
 import { formatDateTime } from "@/lib/utils/date";
-import { cn } from "@/lib/utils/tailwind";
 import React from "react";
 
 
@@ -11,9 +10,9 @@ export const FormattedDateTime = ({
   className?: string;
 }) => {
   return (
-    <p className={cn("body-1 text-light-200", className)}>
+    <span className={ className}>
       {formatDateTime(date)}
-    </p>
+    </span>
   );
 };
 export default FormattedDateTime;

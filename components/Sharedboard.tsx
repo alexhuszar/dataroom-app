@@ -22,8 +22,8 @@ const SharedBoard = () => {
   }, [hasLoaded, getSharedWithMe]);
 
   return (
-    <section className="dashboard-recent-files relative">
-      <div className="mt-9 flex justify-center">
+    <section className="dashboard-colum-wrap relative">
+      <div className="mt-1 flex justify-center">
         <Search />
       </div>
 

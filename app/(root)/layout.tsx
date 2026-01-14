@@ -20,9 +20,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   if (!isAuthenticated || !user) {
@@ -30,13 +28,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <main className="flex h-screen">
-      <Sidebar
-        fullName={user.name}
-        email={user.email}
-      />
+    <main className="flex h-screen overflow-hidden">
+      <Sidebar fullName={user.name} email={user.email} />
 
-      <section className="flex h-full flex-1 flex-col">
+      <section className="flex flex-auto flex-col  overflow-hidden">
         <MobileNavigation
           $id={user.id}
           accountId={user.accountId}
@@ -44,11 +39,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           email={user.email}
         />
         <Header userId={user.id} accountId={user.accountId} />
-        <div className="main-content">
-          <div className="dashboard-container">
-            {children}
-          </div>
-        </div>
+
+        {children}
       </section>
 
       <Toaster />

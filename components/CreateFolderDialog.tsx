@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useFolder } from "@/lib/contexts/FolderContext";
-import { useAuth } from "@/lib/contexts/AuthContext";
 import { useToast } from "@/lib/hooks/useToast";
 
 interface Props {
@@ -22,7 +21,6 @@ interface Props {
 }
 
 const CreateFolderDialog = ({ open, onOpenChange }: Props) => {
-  const { user } = useAuth();
   const params = useParams();
   const searchParams = useSearchParams();
   const currentFolderId = (params?.id as string) || null;
@@ -41,8 +39,6 @@ const CreateFolderDialog = ({ open, onOpenChange }: Props) => {
       });
       return;
     }
-
-    if (!user) return;
 
     setIsLoading(true);
 

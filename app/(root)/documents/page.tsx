@@ -1,7 +1,7 @@
-import Dashboard from "@/components/Dashboard";
+import RecentFilesBoard from "@/components/RecentFilesBoard";
 
 const DashboardPage = () => (
-  <Dashboard mode="files" key="documents" />
+  <RecentFilesBoard />
 );
 
 export default DashboardPage;
