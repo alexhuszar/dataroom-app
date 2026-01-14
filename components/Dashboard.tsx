@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import Loading from "./Loading";
 import { useAuth } from "@/lib/contexts/AuthContext";
 import ActionButtons from "./ActionButtons";
+import { FileDropzone } from "./FileDropzone";
 
 const Dashboard = () => {
   const { files, folders, isLoading: isDataLoading } = useDashboardData();
@@ -21,13 +22,22 @@ const Dashboard = () => {
         <Search />
       </div>
 
-      {isLoading && isDataLoading && <Loading />}
+      <div className="h-full gap-4 overflow-auto p-4 xl:p-8">
+        {isLoading && isDataLoading && <Loading />}
 
-      {isAuthenticated && user && (
-        <ActionButtons ownerId={user?.id} accountId={user?.accountId} className="sm:hidden " />
-      )}
+        {isAuthenticated && user && (
+          <div className="flex  flex-col gap-4">
+            <ActionButtons
+              ownerId={user?.id}
+              accountId={user?.accountId}
+              className="sm:hidden "
+            />
+            <FileDropzone ownerId={user?.id} accountId={user?.accountId} />
+          </div>
+        )}
 
-      <DataTable folders={folders} files={files} currentSort={sort} />
+        <DataTable folders={folders} files={files} currentSort={sort} />
+      </div>
     </section>
   );
 };

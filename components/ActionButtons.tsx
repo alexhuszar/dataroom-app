@@ -14,9 +14,10 @@ interface Props {
 }
 
 const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
+  const params = useParams();
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const fileUploaderRef = useRef<FileUploaderHandle>(null);
-  const params = useParams();
+
   const currentFolderId = (params?.id as string) || null;
 
   const handleUploadClick = () => fileUploaderRef.current?.openFilePicker();
@@ -25,9 +26,7 @@ const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
 
   return (
     <>
-      <div
-        className={`flex ${className} items-center justify-end gap-3 `}
-      >
+      <div className={`flex ${className} items-center justify-end gap-3 `}>
         <Button
           variant="default"
           onClick={handleUploadClick}

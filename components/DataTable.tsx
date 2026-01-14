@@ -208,7 +208,9 @@ const DataTable = ({
             return <span className="text-light-200">-</span>;
           return (
             <span className="text-light-200">
-              {row.original.data.size ? convertFileSize(row.original.data.size) : '-'}
+              {row.original.data.size
+                ? convertFileSize(row.original.data.size)
+                : "-"}
             </span>
           );
         },
@@ -306,58 +308,56 @@ const DataTable = ({
         sm:table-row sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none
       "
             >
-              <td className="sm:hidden grid grid-cols-[40px_1fr_20px] gap-x-4 gap-y-1">
-     
-                  <div className="row-span-full shrink-0">
-                    {flexRender(
-                      row.getVisibleCells()[0].column.columnDef.cell,
-                      row.getVisibleCells()[0].getContext()
-                    )}
-                  </div>
+              <td className="grid grid-cols-[40px_1fr_20px] gap-x-4 gap-y-1 sm:hidden">
+                <div className="row-span-full shrink-0">
+                  {flexRender(
+                    row.getVisibleCells()[0].column.columnDef.cell,
+                    row.getVisibleCells()[0].getContext()
+                  )}
+                </div>
 
-                  <div className="flex min-w-0 flex-col gap-2">
-                    {row
-                      .getVisibleCells()
-                      .slice(1)
-                      .map((cell) => {
-                        if (cell.column.id === "actions") return null;
+                <div className="flex min-w-0 flex-col gap-2">
+                  {row
+                    .getVisibleCells()
+                    .slice(1)
+                    .map((cell) => {
+                      if (cell.column.id === "actions") return null;
 
-                        const isType = cell.column.id === "type";
-                        const isFolder = cell.getValue() === "file";
+                      const isType = cell.column.id === "type";
+                      const isFolder = cell.getValue() === "file";
 
-                        console.log(cell.getValue())
+                      return (
+                        <div
+                          key={cell.id}
+                          className={
+                            isType
+                              ? `inline-flex w-fit items-center rounded-[8px] ${isFolder ? "bg-orange" : "bg-green"} px-2 py-1 text-white`
+                              : "truncate text-sm text-light-100"
+                          }
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
 
-                        return (
-                          <div
-                            key={cell.id}
-                            className={
-                              isType
-                                ? `inline-flex w-fit items-center rounded-[8px] ${isFolder ? "bg-orange" : "bg-green"} px-2 py-1 text-white`
-                                : "truncate text-sm text-light-100"
-                            }
-                          >
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </div>
-                        );
-                      })}
-                  </div>
-
-                  <div className="shrink-0">
-                    {flexRender(
-                      row.getVisibleCells()[5].column.columnDef.cell,
-                      row.getVisibleCells()[5].getContext()
-                    )}
-                  </div>
-           
+                <div className="shrink-0">
+                  {flexRender(
+                    row.getVisibleCells()[5].column.columnDef.cell,
+                    row.getVisibleCells()[5].getContext()
+                  )}
+                </div>
               </td>
 
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id} className="hidden sm:table-cell">
                   {cell.column.id === "type" ? (
-                    <span className={`w-fit items-center rounded-[8px] ${ cell.getValue() === "folder" ? "bg-orange" : "bg-green"} px-2 py-1 text-xs font-medium text-white sm:inline-flex`}>
+                    <span
+                      className={`w-fit items-center rounded-[8px] ${cell.getValue() === "folder" ? "bg-orange" : "bg-green"} px-2 py-1 text-xs font-medium text-white sm:inline-flex`}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
