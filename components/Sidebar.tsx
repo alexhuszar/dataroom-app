@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { navItems } from "@/constants";
+import { navItems } from "@/lib/utils/constants";
 import { usePathname, useParams } from "next/navigation";
 import { cn } from "@/lib/utils/tailwind";
 
@@ -11,7 +11,7 @@ interface Props {
   email: string;
 }
 
-const Sidebar = ({ fullName, email }: Props) => {
+export const Sidebar = ({ fullName, email }: Props) => {
   const pathname = usePathname();
   const params = useParams();
 
@@ -58,4 +58,3 @@ const Sidebar = ({ fullName, email }: Props) => {
     </aside>
   );
 };
-export default Sidebar;

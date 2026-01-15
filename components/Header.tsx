@@ -5,11 +5,11 @@ import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/contexts/AuthContext";
 import { usePathname, useRouter } from "next/navigation";
-import Breadcrumb from "./Breadcrumb";
-import { navItems } from "@/constants";
-import ActionButtons from "./ActionButtons";
+import { Breadcrumb } from "./Breadcrumb";
+import { navItems } from "@/lib/utils/constants";
+import { ActionButtons } from "./ActionButtons";
 
-const Header = ({
+export const Header = ({
   userId,
   accountId,
 }: {
@@ -46,4 +46,3 @@ const Header = ({
     </header>
   );
 };
-export default Header;

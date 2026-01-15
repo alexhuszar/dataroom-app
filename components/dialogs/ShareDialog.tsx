@@ -21,7 +21,12 @@ interface ShareDialogProps {
   onClose: () => void;
 }
 
-const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) => {
+export const ShareDialog = ({
+  fileId,
+  fileName,
+  isOpen,
+  onClose,
+}: ShareDialogProps) => {
   const [email, setEmail] = useState("");
   const [shares, setShares] = useState<Share[]>([]);
   const [isLoadingShares, setIsLoadingShares] = useState(false);
@@ -191,5 +196,3 @@ const ShareDialog = ({ fileId, fileName, isOpen, onClose }: ShareDialogProps) =>
     </Dialog>
   );
 };
-
-export default ShareDialog;

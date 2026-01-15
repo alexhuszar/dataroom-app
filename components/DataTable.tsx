@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/table";
 import { Thumbnail } from "@/components/Thumbnail";
 import { FormattedDateTime } from "@/components/FormattedDateTime";
-import ActionDropdown from "@/components/ActionDropdown";
+import { ActionDropdown } from "@/components/ActionDropdown";
 import { convertFileSize } from "@/lib/utils/file";
 import { Button } from "./ui/button";
 
@@ -52,7 +52,7 @@ const getFileTypeName = (fileType: string): string => {
   return typeMap[fileType] || "File";
 };
 
-const DataTable = ({
+export const DataTable = ({
   folders,
   files,
   currentSort,
@@ -389,4 +389,3 @@ const DataTable = ({
   );
 };
 
-export default DataTable;

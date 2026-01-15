@@ -8,10 +8,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { sortTypes } from "@/constants";
+import { sortTypes } from "@/lib/utils/constants";
 import { ArrowDownAZ, ArrowUpZA } from "lucide-react";
 
-const Sort = () => {
+export const Sort = () => {
   const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -60,5 +60,3 @@ const Sort = () => {
     </Select>
   );
 };
-
-export default Sort;

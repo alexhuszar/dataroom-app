@@ -1,6 +1,6 @@
 import { Loader2 } from "lucide-react";
 
-const Loading = () => (
+export const Loading = () => (
   <div className="absolute inset-0 z-50 flex items-center justify-center">
     <div className="flex flex-col items-center gap-4 p-8 ">
       <Loader2 className="size-12 animate-spin text-brand" />
@@ -8,5 +8,3 @@ const Loading = () => (
     </div>
   </div>
 );
-
-export default Loading;

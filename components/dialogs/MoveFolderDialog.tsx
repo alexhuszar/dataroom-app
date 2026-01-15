@@ -20,7 +20,7 @@ interface Props {
   onClose: () => void;
 }
 
-const MoveFolderDialog = ({ folder, onClose }: Props) => {
+export const MoveFolderDialog = ({ folder, onClose }: Props) => {
   const { user } = useAuth();
   const params = useParams();
   const searchParams = useSearchParams();
@@ -124,5 +124,3 @@ const MoveFolderDialog = ({ folder, onClose }: Props) => {
     </DialogContent>
   );
 };
-
-export default MoveFolderDialog;

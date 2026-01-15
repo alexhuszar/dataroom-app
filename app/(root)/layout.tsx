@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Sidebar from "@/components/Sidebar";
-import MobileNavigation from "@/components/MobileNavigation";
-import Header from "@/components/Header";
+import { Sidebar } from "@/components/Sidebar";
+import { MobileNavigation } from "@/components/MobileNavigation";
+import { Header } from "@/components/Header";
 import { useAuth } from "@/lib/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
-import Loading from "@/components/Loading";
-import OpenFileDialog from "@/components/dialogs/OpenFileDialog";
+import { Loading } from "@/components/Loading";
+import { OpenFileDialog } from "@/components/dialogs/OpenFileDialog";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading, isAuthenticated } = useAuth();

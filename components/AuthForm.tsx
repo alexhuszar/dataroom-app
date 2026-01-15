@@ -94,7 +94,7 @@ const PasswordField = ({
   );
 };
 
-const AuthForm = ({ type }: { type: FormType }) => {
+export const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const { signUp, signIn } = useAuth();
 
@@ -234,5 +234,3 @@ const AuthForm = ({ type }: { type: FormType }) => {
     </Form>
   );
 };
-
-export default AuthForm;

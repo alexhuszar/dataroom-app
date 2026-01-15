@@ -10,7 +10,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { IframePdfDocument } from "../IframePdfDocument";
 
-const OpenFileDialog = () => {
+export const OpenFileDialog = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -62,5 +62,3 @@ const OpenFileDialog = () => {
     </Dialog>
   );
 };
-
-export default OpenFileDialog;

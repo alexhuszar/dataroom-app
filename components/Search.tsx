@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useFile } from "@/lib/contexts/FileContext";
 import { Search as SearchIcon } from "lucide-react";
 
-
-const Search = () => {
+export const Search = () => {
   const { getFiles, clearFiles } = useFile();
   const [query, setQuery] = useState("");
   useEffect(() => {
@@ -36,5 +35,3 @@ const Search = () => {
     </div>
   );
 };
-
-export default Search;

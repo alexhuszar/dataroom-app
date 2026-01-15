@@ -13,8 +13,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import FileUploader from "@/components/FileUploader";
-import { navItems } from "@/constants";
+import { FileUploader } from "@/components/FileUploader";
+import { navItems } from "@/lib/utils/constants";
 import { cn } from "@/lib/utils/tailwind";
 import { useAuth } from "@/lib/contexts/AuthContext";
 
@@ -25,7 +25,7 @@ interface MobileNavigationProps {
   email: string;
 }
 
-const MobileNavigation = ({
+export const MobileNavigation = ({
   $id: ownerId,
   accountId,
   fullName,
@@ -77,9 +77,13 @@ const MobileNavigation = ({
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">
               {navItems.map(({ url, name, icon }) => {
-                const isActive = url === "/"
-                  ? pathname === "/" || (params?.id && !pathname.startsWith("/documents") && !pathname.startsWith("/shared"))
-                  : pathname === url || pathname.startsWith(`${url}/`);
+                const isActive =
+                  url === "/"
+                    ? pathname === "/" ||
+                      (params?.id &&
+                        !pathname.startsWith("/documents") &&
+                        !pathname.startsWith("/shared"))
+                    : pathname === url || pathname.startsWith(`${url}/`);
 
                 return (
                   <li key={name}>
@@ -123,5 +127,3 @@ const MobileNavigation = ({
     </header>
   );
 };
-
-export default MobileNavigation;

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DataTable from "@/components/DataTable";
+import { DataTable } from "@/components/DataTable";
 import { useShare } from "@/lib/contexts/ShareContext";
-import Search from "@/components/Search";
-import Loading from "@/components/Loading";
+import { Search } from "@/components/Search";
+import { Loading } from "@/components/Loading";
 import { useSearchParams } from "next/navigation";
 
 const SharedBoard = () => {
@@ -35,4 +35,3 @@ const SharedBoard = () => {
   );
 };
 
-export default SharedBoard;

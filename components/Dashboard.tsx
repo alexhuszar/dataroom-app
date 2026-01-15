@@ -1,15 +1,15 @@
 "use client";
 
-import DataTable from "@/components/DataTable";
+import { DataTable } from "@/components/DataTable";
 import { useDashboardData } from "@/lib/hooks/useDashBoardData";
-import Search from "@/components/Search";
+import { Search } from "@/components/Search";
 import { useSearchParams } from "next/navigation";
-import Loading from "./Loading";
+import { Loading } from "./Loading";
 import { useAuth } from "@/lib/contexts/AuthContext";
-import ActionButtons from "./ActionButtons";
+import { ActionButtons } from "./ActionButtons";
 import { FileDropzone } from "./FileDropzone";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   const { files, folders, isLoading: isDataLoading } = useDashboardData();
   const { user, isAuthenticated, isLoading } = useAuth();
   const searchParams = useSearchParams();
@@ -42,4 +42,3 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;

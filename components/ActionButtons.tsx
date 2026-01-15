@@ -4,9 +4,9 @@ import { useState, useRef } from "react";
 import { FolderPlus, Upload } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import CreateFolderDialog from "@/components/CreateFolderDialog";
-import FileUploader, { FileUploaderHandle } from "@/components/FileUploader";
-import { navItems } from "@/constants";
+import { CreateFolderDialog } from "@/components/CreateFolderDialog";
+import { FileUploader, FileUploaderHandle } from "@/components/FileUploader";
+import { navItems } from "@/lib/utils/constants";
 
 interface Props {
   ownerId: string;
@@ -14,7 +14,11 @@ interface Props {
   className?: string;
 }
 
-const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
+export const ActionButtons = ({
+  ownerId,
+  accountId,
+  className = "flex",
+}: Props) => {
   const params = useParams();
   const path = usePathname();
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
@@ -26,9 +30,9 @@ const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
     fileUploaderRef.current?.openFilePicker();
   };
 
-  const boardRoute = path === navItems[0].url
+  const boardRoute = path === navItems[0].url;
 
-  if(!boardRoute) return null;
+  if (!boardRoute) return null;
 
   return (
     <>
@@ -64,5 +68,3 @@ const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
     </>
   );
 };
-
-export default ActionButtons;

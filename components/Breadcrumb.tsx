@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { useBreadcrumbs } from "@/lib/hooks/useBreadcrumbs";
 
-const Breadcrumb = () => {
+export const Breadcrumb = () => {
   const breadcrumbs = useBreadcrumbs();
 
   return (
@@ -31,5 +31,3 @@ const Breadcrumb = () => {
     </nav>
   );
 };
-
-export default Breadcrumb;

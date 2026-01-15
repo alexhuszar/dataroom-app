@@ -20,7 +20,7 @@ interface Props {
   onOpenChange: (open: boolean) => void;
 }
 
-const CreateFolderDialog = ({ open, onOpenChange }: Props) => {
+export const CreateFolderDialog = ({ open, onOpenChange }: Props) => {
   const params = useParams();
   const searchParams = useSearchParams();
   const currentFolderId = (params?.id as string) || null;
@@ -101,5 +101,3 @@ const CreateFolderDialog = ({ open, onOpenChange }: Props) => {
     </Dialog>
   );
 };
-
-export default CreateFolderDialog;

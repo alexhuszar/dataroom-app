@@ -18,4 +18,3 @@ export const Thumbnail = ({
     </figure>
   );
 };
-export default Thumbnail;

@@ -3,7 +3,7 @@
 import { UploadIcon } from "@radix-ui/react-icons";
 import { useCallback, useRef } from "react";
 import { useDropzone } from "react-dropzone";
-import FileUploader, { FileUploaderHandle } from "./FileUploader";
+import { FileUploader, FileUploaderHandle } from "./FileUploader";
 import { useParams } from "next/navigation";
 
 type FileDropzoneProps = {

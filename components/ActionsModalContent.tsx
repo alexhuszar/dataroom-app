@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import Thumbnail from "@/components/Thumbnail";
-import FormattedDateTime from "@/components/FormattedDateTime";
+import  { Thumbnail } from "@/components/Thumbnail";
+import { FormattedDateTime } from "@/components/FormattedDateTime";
 import { convertFileSize } from "@/lib/utils/file";
 import { formatDateTime } from "@/lib/utils/date";
 

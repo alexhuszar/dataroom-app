@@ -1,4 +1,4 @@
-import RecentFilesBoard from "@/components/RecentFilesBoard";
+import { RecentFilesBoard } from "@/components/RecentFilesBoard";
 
 const DashboardPage = () => (
   <RecentFilesBoard />

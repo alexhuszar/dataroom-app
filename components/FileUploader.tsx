@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Thumbnail from "@/components/Thumbnail";
+import { Thumbnail } from "@/components/Thumbnail";
 import { useToast } from "@/lib/hooks/useToast";
 import { useFile } from "@/lib/contexts/FileContext";
 import { getFileType } from "@/lib/utils/file";
@@ -31,7 +31,7 @@ type UploadingFile = {
   file: File;
 };
 
-const FileUploader = forwardRef<FileUploaderHandle, Props>(
+export const FileUploader = forwardRef<FileUploaderHandle, Props>(
   ({ ownerId, accountId, currentFolderId }, ref) => {
     const { toast } = useToast();
     const { uploadFile } = useFile();
@@ -143,4 +143,3 @@ const FileUploader = forwardRef<FileUploaderHandle, Props>(
 
 FileUploader.displayName = "FileUploader";
 
-export default FileUploader;

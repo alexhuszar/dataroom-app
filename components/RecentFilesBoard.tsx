@@ -1,11 +1,12 @@
 "use client";
-import DataTable from "@/components/DataTable";
-import Search from "@/components/Search";
-import Loading from "@/components/Loading";
+
+import { DataTable } from "@/components/DataTable";
+import { Search } from "@/components/Search";
+import { Loading } from "@/components/Loading";
 import { useSearchParams } from "next/navigation";
 import { useDashboardData } from "@/lib/hooks/useDashBoardData";
 
-const RecentFilesBoard = () => {
+export const RecentFilesBoard = () => {
   const { files, isLoading: isDataLoading } = useDashboardData({
     mode: "files",
   });
@@ -25,5 +26,3 @@ const RecentFilesBoard = () => {
     </section>
   );
 };
-
-export default RecentFilesBoard;

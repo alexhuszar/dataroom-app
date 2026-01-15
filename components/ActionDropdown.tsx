@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { actionsDropdownItems } from "@/constants";
+import { actionsDropdownItems } from "@/lib/utils/constants";
 import { FileDetails } from "@/components/ActionsModalContent";
 import {
   useDropdownAction,
@@ -29,10 +29,10 @@ import {
   FolderDocumentType,
 } from "@/lib/hooks/useDropdownAction";
 import { useAuth } from "@/lib/contexts/AuthContext";
-import MoveFolderDialog from "./dialogs/MoveFolderDialog";
-import ShareDialog from "./dialogs/ShareDialog";
+import { MoveFolderDialog } from "./dialogs/MoveFolderDialog";
+import { ShareDialog } from "./dialogs/ShareDialog";
 
-const ActionDropdown = ({
+export const ActionDropdown = ({
   item,
   type,
 }: {
@@ -230,5 +230,3 @@ const ActionDropdown = ({
     </Dialog>
   );
 };
-
-export default ActionDropdown;

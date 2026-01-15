@@ -1,7 +1,6 @@
 import { formatDateTime } from "@/lib/utils/date";
 import React from "react";
 
-
 export const FormattedDateTime = ({
   date,
   className,
@@ -9,10 +8,5 @@ export const FormattedDateTime = ({
   date: string;
   className?: string;
 }) => {
-  return (
-    <span className={ className}>
-      {formatDateTime(date)}
-    </span>
-  );
+  return <span className={className}>{formatDateTime(date)}</span>;
 };
-export default FormattedDateTime;
