@@ -8,6 +8,7 @@ import { useAuth } from "@/lib/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import Loading from "@/components/Loading";
+import OpenFileDialog from "@/components/dialogs/OpenFileDialog";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading, isAuthenticated } = useAuth();
@@ -43,6 +44,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </section>
 
+      <OpenFileDialog />
       <Toaster />
     </main>
   );

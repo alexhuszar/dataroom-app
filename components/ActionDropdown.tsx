@@ -28,9 +28,9 @@ import {
   FileDocumentType,
   FolderDocumentType,
 } from "@/lib/hooks/useDropdownAction";
-import MoveFolderDialog from "./MoveFolderDialog";
-import ShareDialog from "./ShareDialog";
 import { useAuth } from "@/lib/contexts/AuthContext";
+import MoveFolderDialog from "./dialogs/MoveFolderDialog";
+import ShareDialog from "./dialogs/ShareDialog";
 
 const ActionDropdown = ({
   item,

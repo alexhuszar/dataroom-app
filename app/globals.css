@@ -180,7 +180,7 @@
     @apply cursor-pointer !important;
   }
   .shad-dialog {
-    @apply rounded-[26px] w-[90%] max-w-[400px] px-6 py-8   !important;
+    @apply rounded-[4px] px-0 py-2 border-none !important;
   }
   .shad-select-item {
     @apply cursor-pointer !important;
@@ -191,9 +191,6 @@
   }
   .dashboard-colum-wrap {
     @apply flex flex-col overflow-auto gap-4 h-full p-4 xl:p-8;
-  }
-  .recent-file-name {
-    @apply subtitle-2 line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
   }
   .empty-list {
     @apply body-1 mt-10 text-center text-light-200;

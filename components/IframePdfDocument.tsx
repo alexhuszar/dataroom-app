@@ -21,18 +21,16 @@ const IframePdfDocument = ({ fileId, fileName }: IframePdfDocumentProps) => {
         setLoading(true);
         setError(null);
 
-
         const { db, STORES } = await import("@/lib/db/indexeddb");
         await db.init();
-        const fileDocument = await db.get<import("@/lib/db/indexeddb").FileDocument>(
-          STORES.FILES,
-          fileId
-        );
+        const fileDocument = await db.get<
+          import("@/lib/db/indexeddb").FileDocument
+        >(STORES.FILES, fileId);
 
         if (!fileDocument) {
           throw new Error("File metadata not found");
         }
-        
+
         const { fileStorage } = await import("@/lib/db/fileStorage");
         const storedFile = await fileStorage.getFile(fileDocument.bucketFileId);
 
@@ -77,17 +75,12 @@ const IframePdfDocument = ({ fileId, fileName }: IframePdfDocumentProps) => {
 
   return (
     <div className="flex h-screen flex-col bg-dark-100">
-      <div className="flex items-center justify-between border-b border-dark-200 p-4">
-        <h1 className="text-lg font-semibold text-light-100">{fileName}</h1>
-      </div>
-      <div className="flex-1">
-        <iframe
-          data-testid="document-iframe"
-          src={blobUrl}
-          className="size-full border-0"
-          title={fileName}
-        />
-      </div>
+      <iframe
+        data-testid="document-iframe"
+        src={blobUrl}
+        className="size-full border-0"
+        title={fileName}
+      />
     </div>
   );
 };

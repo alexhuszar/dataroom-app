@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import {
   useReactTable,
   getCoreRowModel,
@@ -32,6 +31,7 @@ import { Thumbnail } from "@/components/Thumbnail";
 import { FormattedDateTime } from "@/components/FormattedDateTime";
 import ActionDropdown from "@/components/ActionDropdown";
 import { convertFileSize } from "@/lib/utils/file";
+import { Button } from "./ui/button";
 
 interface DataTableProps {
   folders: FolderDocumentType[];
@@ -87,7 +87,17 @@ const DataTable = ({
     const newUrl = `${pathname}?${currentParams.toString()}`;
     router.push(newUrl, { scroll: false });
   };
+  const handleOpenFile = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    fileId: string,
+    fileName: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
 
+    const newUrl = `${pathname}?fileId=${fileId}&fileName=${fileName}`;
+    router.push(newUrl, { scroll: false });
+  };
   const tableData: TableRowData[] = useMemo(() => {
     const folderRows: TableRowData[] = folders.map((folder) => ({
       type: "folder" as const,
@@ -142,7 +152,8 @@ const DataTable = ({
         cell: ({ row }) => {
           if (row.original.type === "folder") {
             return (
-              <button
+              <Button
+                variant="link"
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
@@ -154,19 +165,21 @@ const DataTable = ({
                 <p className="subtitle-2 text-light-100 transition-colors hover:text-brand">
                   {row.original.data.name}
                 </p>
-              </button>
+              </Button>
             );
           }
           return (
-            <Link
-              href={`documents/${row.original.data.id}?title=${row.original.data.name}`}
-              target="_blank"
-              className="block w-full min-w-0 text-left"
+            <Button
+              variant="link"
+              disabled={row.original.data.extension !== 'pdf'}
+              onClick={(e) => {
+                console.log(row);
+                handleOpenFile(e, row.original.data.id, row.original.data.name);
+              }}
+              className="subtitle-2 truncate text-light-100 transition-colors hover:text-brand"
             >
-              <p className="subtitle-2 truncate text-light-100 transition-colors hover:text-brand">
-                {row.original.data.name}
-              </p>
-            </Link>
+              {row.original.data.name}
+            </Button>
           );
         },
       },
