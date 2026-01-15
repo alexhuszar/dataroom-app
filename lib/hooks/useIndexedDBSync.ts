@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { db } from "@/lib/db/indexeddb";
+import { db, STORES, type User } from "@/lib/db/indexeddb";
 
 export function useIndexedDBSync() {
   const { data: session, status } = useSession();
@@ -21,12 +21,16 @@ export function useIndexedDBSync() {
 
         if (exists) return;
 
-        await db.createUser({
+        const newUser: User = {
+          id: user.id,
           email: user.email || "",
           name: user.name ?? "",
           provider: user.provider as "credentials" | "google",
           accountId: email,
-        });
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        await db.add(STORES.USERS, newUser);
 
         console.log("User synced to IndexedDB:", email);
       } catch (error) {
