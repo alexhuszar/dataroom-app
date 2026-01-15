@@ -51,8 +51,8 @@ export const FileUploader = forwardRef<FileUploaderHandle, Props>(
             toast({
               description: (
                 <p className="body-2 text-white">
-                  <span className="font-semibold">{file.name}</span> is too large.
-                  Max file size is 10MB.
+                  <span className="font-semibold">{file.name}</span> is too
+                  large. Max file size is 10MB.
                 </p>
               ),
               className: "error-toast",
@@ -96,8 +96,12 @@ export const FileUploader = forwardRef<FileUploaderHandle, Props>(
 
     return (
       <>
-        {/* Hidden file input for button-triggered uploads */}
+       
+        <label htmlFor="file-upload"  className="hidden">
+          Upload files
+        </label>
         <input
+          id="file-upload"
           ref={inputRef}
           type="file"
           multiple
@@ -142,4 +146,3 @@ export const FileUploader = forwardRef<FileUploaderHandle, Props>(
 );
 
 FileUploader.displayName = "FileUploader";
-

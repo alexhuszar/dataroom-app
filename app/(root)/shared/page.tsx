@@ -1,4 +1,4 @@
-import SharedBoard from "@/components/Sharedboard";
+import { SharedBoard } from "@/components/Sharedboard";
 
 const DashboardPage = () => <><SharedBoard /></>;
 

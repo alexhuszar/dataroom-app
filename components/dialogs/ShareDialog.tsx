@@ -97,7 +97,7 @@ export const ShareDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className="shad-dialog button max-w-md"
+        className="shad-dialog button max-w-md p-5"
         onClick={(e) => e.stopPropagation()}
       >
         <DialogHeader>

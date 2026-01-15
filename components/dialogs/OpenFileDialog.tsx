@@ -44,6 +44,7 @@ export const OpenFileDialog = () => {
           max-w-none
           gap-0
           overflow-hidden
+          p-0
         "
       >
         <DialogHeader className="border-b px-6 py-4">

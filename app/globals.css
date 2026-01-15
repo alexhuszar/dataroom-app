@@ -180,7 +180,7 @@
     @apply cursor-pointer !important;
   }
   .shad-dialog {
-    @apply rounded-[4px] px-0 py-2 border-none !important;
+    @apply rounded-[4px] border-none !important;
   }
   .shad-select-item {
     @apply cursor-pointer !important;

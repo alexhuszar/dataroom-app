@@ -7,7 +7,7 @@ import { Search } from "@/components/Search";
 import { Loading } from "@/components/Loading";
 import { useSearchParams } from "next/navigation";
 
-const SharedBoard = () => {
+export const SharedBoard = () => {
   const { sharedFiles, getSharedWithMe, isLoading } = useShare();
   const [hasLoaded, setHasLoaded] = useState(false);
   const searchParams = useSearchParams();

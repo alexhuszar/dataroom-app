@@ -75,7 +75,7 @@ export const MoveFolderDialog = ({ folder, onClose }: Props) => {
   };
 
   return (
-    <DialogContent className="shad-dialog button">
+    <DialogContent className="shad-dialog button p-5">
       <DialogHeader className="flex flex-col gap-3">
         <DialogTitle className="text-center text-light-100">
           Move &ldquo;{folder.name}&ldquo; to...
