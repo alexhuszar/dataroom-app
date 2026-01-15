@@ -1,17 +1,62 @@
-# Dataroom App
+# Store IT - Dataroom App
 
-A Next.js application for secure data room management with file storage, user authentication.
+A secure data room management application built with Next.js 15 and React 19. Features file management, folder organization, file sharing, and user authentication.
 
 ## Features
 
-- Next.js 15 with App Router
-- NextAuth.js for authentication
-- React Hook Form with Zod validation
-- Radix UI components with Tailwind CSS
-- Docker support for containerized deployment
-- Vercel-ready for cloud deployment
+### Authentication
+- Email/password sign-up and sign-in
+- Google OAuth integration (optional)
+- JWT session management with NextAuth.js
+- Secure password hashing with bcrypt
 
-### Local Development
+### File Management
+- Drag-and-drop file upload
+- File type detection (PDF, images, documents, etc.)
+- Search and filter files by type
+- Sort by date, name, or size
+- Rename, delete, and move files
+- PDF viewer in dialog
+
+### Folder Management
+- Create nested folder hierarchies
+- Rename, delete, and move folders
+- Breadcrumb navigation
+- Cascade delete for folders with contents
+
+### File Sharing
+- Share files with specific email addresses
+- Share with unregistered users (pending registration)
+- View files shared with you
+- Manage and revoke shares
+
+### User Interface
+- Responsive design with mobile navigation
+- Dashboard with recent files
+- Shared files board
+- Data table with sorting and filtering
+- Toast notifications
+- Dark mode support
+
+## Tech Stack
+
+- **Framework**: Next.js 15.5.9 with App Router
+- **UI**: React 19, Tailwind CSS, Radix UI
+- **Forms**: React Hook Form + Zod validation
+- **Tables**: TanStack React Table
+- **Auth**: NextAuth.js 4.24
+- **Storage**: IndexedDB (client-side)
+- **Testing**: Jest + React Testing Library
+- **Build**: Turbopack
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v22.21.1
+- npm
+
+### Installation
 
 1. **Clone the repository**
    ```bash
@@ -29,13 +74,14 @@ A Next.js application for secure data room management with file storage, user au
    copy .env.example .env
    ```
 
-   Edit `.env` and configure:
+   Configure your `.env` file:
    ```env
-   DATABASE_URL=postgresql://postgres:postgres@localhost:5432/dataroom
    NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=your-secret-key-here
-   GOOGLE_CLIENT_ID=your-client-id-here
-   GOOGLE_CLIENT_SECRET=your-client-secret-here
+   NEXTAUTH_SECRET=your-secret-key-here  # Generate with: openssl rand -base64 32
+
+   # Optional: Google OAuth
+   GOOGLE_CLIENT_ID=your-client-id
+   GOOGLE_CLIENT_SECRET=your-client-secret
    ```
 
 4. **Run the development server**
@@ -46,43 +92,77 @@ A Next.js application for secure data room management with file storage, user au
 5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+## Scripts
 
-This application is optimized for deployment on Vercel.
-
+```bash
+npm run dev          # Start development server with Turbopack
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run test         # Run tests
+npm run test:watch   # Run tests in watch mode
+```
 
 ## Project Structure
 
 ```
 dataroom-app/
-├── app/                    # Next.js App Router pages
-├── components/             # React components
-├── lib/                    # Utility functions and configurations
-├── public/                 # Static assets
-├── .dockerignore          # Docker ignore rules
-├── .env.example           # Environment variables template
-├── docker-compose.yml     # Docker Compose configuration
-├── Dockerfile             # Docker build instructions
-├── next.config.ts         # Next.js configuration
-└── package.json           # Dependencies and scripts
+├── app/                          # Next.js App Router
+│   ├── (auth)/                   # Auth pages (sign-in, sign-up)
+│   ├── (root)/                   # Main app pages
+│   │   ├── page.tsx              # Dashboard
+│   │   ├── documents/            # Recent files
+│   │   ├── shared/               # Shared files
+│   │   └── [id]/                 # Folder view
+│   └── api/auth/                 # NextAuth API routes
+├── components/                   # React components
+│   ├── ui/                       # Shadcn/Radix UI primitives
+│   ├── dialogs/                  # Modal dialogs
+│   ├── Dashboard.tsx             # Main dashboard
+│   ├── DataTable.tsx             # File/folder table
+│   ├── FileUploader.tsx          # Upload component
+│   └── ...
+├── lib/
+│   ├── contexts/                 # React contexts (Auth, File, Folder, Share)
+│   ├── db/                       # IndexedDB service
+│   ├── hooks/                    # Custom React hooks
+│   ├── server/                   # Server-side utilities
+│   └── utils/                    # Helper functions
+└── public/                       # Static assets
 ```
 
 ## Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
 | `NEXTAUTH_URL` | Application URL | Yes |
 | `NEXTAUTH_SECRET` | Secret for NextAuth.js | Yes |
 | `GOOGLE_CLIENT_ID` | Google OAuth Client ID | No |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth Client Secret | No |
 
-## Scripts
+## Docker Deployment
+
+Build and run with Docker:
 
 ```bash
-npm run dev      # Start development server with Turbopack
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
+docker-compose up --build
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Testing
+
+Run the test suite:
+
+```bash
+npm run test
+```
+
+Run tests in watch mode during development:
+
+```bash
+npm run test:watch
 ```
 
 ## License
