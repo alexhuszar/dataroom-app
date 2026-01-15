@@ -2,10 +2,11 @@
 
 import { useState, useRef } from "react";
 import { FolderPlus, Upload } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import CreateFolderDialog from "@/components/CreateFolderDialog";
 import FileUploader, { FileUploaderHandle } from "@/components/FileUploader";
+import { navItems } from "@/constants";
 
 interface Props {
   ownerId: string;
@@ -15,30 +16,34 @@ interface Props {
 
 const ActionButtons = ({ ownerId, accountId, className = "flex" }: Props) => {
   const params = useParams();
+  const path = usePathname();
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const fileUploaderRef = useRef<FileUploaderHandle>(null);
 
   const currentFolderId = (params?.id as string) || null;
 
-  const handleUploadClick = () => fileUploaderRef.current?.openFilePicker();
+  const handleUploadClick = () => {
+    fileUploaderRef.current?.openFilePicker();
+  };
 
-  const handleCreateFolderClick = () => setIsFolderDialogOpen(true);
+  const boardRoute = path === navItems[0].url
+
+  if(!boardRoute) return null;
 
   return (
     <>
-      <div className={`flex ${className} items-center justify-end gap-3 `}>
+      <div className={`flex ${className} items-center justify-end gap-3`}>
         <Button
-          variant="default"
           onClick={handleUploadClick}
-          className="flex cursor-pointer items-center gap-3 bg-brand/10 text-brand"
+          className="flex items-center gap-3 bg-brand/10 text-brand"
         >
           <Upload size={18} />
           <span>Upload File</span>
         </Button>
 
         <Button
-          onClick={handleCreateFolderClick}
-          className="flex cursor-pointer items-center gap-3 bg-brand/10 text-brand"
+          onClick={() => setIsFolderDialogOpen(true)}
+          className="flex items-center gap-3 bg-brand/10 text-brand"
         >
           <FolderPlus size={18} />
           <span>Create Folder</span>

@@ -1,13 +1,13 @@
 import React from "react";
 import {
   Download,
-  FileText,
   Pen,
   Info,
   Trash,
   Home,
   Share2,
   Users,
+  Clock,
 } from "lucide-react";
 import type { ActionItem } from "@/lib/hooks/useDropdownAction";
 
@@ -25,7 +25,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: "Recent documents",
-    icon: <FileText />,
+    icon: <Clock />,
     url: "/documents",
   },
   {
