@@ -1,4 +1,4 @@
-import { db, STORES } from "./indexeddb";
+import { db, STORES, _resetForTesting, _getDBForTesting } from "./indexeddb";
 import { generateId } from "../utils/general";
 import { withTimestamps, updateTimestamp } from "../utils/date";
 
@@ -68,7 +68,7 @@ beforeEach(async () => {
   jest.clearAllMocks();
 
   // Reset the db instance
-  (db as unknown as { db: IDBDatabase | null }).db = null;
+  _resetForTesting();
 
   // Recreate mock open request for each test
   (global.indexedDB.open as jest.Mock).mockImplementation(() => createMockOpenRequest());
@@ -93,7 +93,7 @@ describe("IndexedDBService", () => {
   describe("init()", () => {
     it("initializes database successfully", async () => {
       // Reset and test fresh init
-      (db as unknown as { db: IDBDatabase | null }).db = null;
+      _resetForTesting();
       await expect(db.init()).resolves.toBeUndefined();
     });
   });
@@ -105,9 +105,9 @@ describe("IndexedDBService", () => {
       delete global.indexedDB;
 
       // Reset db so it tries to access indexedDB
-      (db as unknown as { db: IDBDatabase | null }).db = null;
+      _resetForTesting();
 
-      await expect((db as unknown as { getDB: () => Promise<IDBDatabase> }).getDB()).rejects.toThrow(
+      await expect(_getDBForTesting()).rejects.toThrow(
         "IndexedDB not supported"
       );
 
