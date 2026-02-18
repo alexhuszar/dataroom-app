@@ -17,12 +17,9 @@ export function FileDropzone({ ownerId, accountId }: FileDropzoneProps) {
 
   const currentFolderId = (params?.id as string) || null;
 
-  const onDrop = useCallback(
-    (files: File[]) => {
-      uploaderRef.current?.handleFiles(files);
-    },
-    []
-  );
+  const onDrop = useCallback((files: File[]) => {
+    uploaderRef.current?.handleFiles(files);
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -48,13 +45,9 @@ export function FileDropzone({ ownerId, accountId }: FileDropzoneProps) {
 
         <UploadIcon className="mb-3 size-6 text-muted-foreground" />
 
-        <p className="text-sm font-medium">
-          Drag & drop files here
-        </p>
+        <p className="text-sm font-medium">Drag & drop files here</p>
 
-        <p className="mt-1 text-xs text-muted-foreground">
-          or click to browse
-        </p>
+        <p className="mt-1 text-xs text-muted-foreground">or click to browse</p>
       </div>
 
       <FileUploader

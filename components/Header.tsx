@@ -19,7 +19,7 @@ export const Header = ({
   const pathname = usePathname();
 
   const activeItem = navItems.find(
-    (item) => item.url === pathname && pathname !== "/"
+    (item) => item.url === pathname && pathname !== "/",
   );
 
   const { signOut } = useAuth();
@@ -29,6 +29,10 @@ export const Header = ({
     await signOut();
     router.push("/sign-in");
   };
+
+  <Button onClick={handleSignOut} className="sign-out-button">
+    <LogOut />
+  </Button>;
 
   return (
     <header className="header">
